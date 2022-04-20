@@ -5,10 +5,12 @@ This is a script to count how many times a phoneme occurs in a set of HTS ".lab"
 ## How to use:
 
 ```
-python -m phoneme_count.py
+pip install -r requirements.txt
 ```
-
-You'll then be  asked to select a directory that contains ".lab" files. Please make sure the directory only has ".lab" files in it!
+```
+python phoneme_count.py
+```
+You'll be asked to select a database. Your best bet is to select the folder containing the data, no extra files, just in case.
 
 A file called "phoneme_count.txt" will be output into the root folder.
 
@@ -19,9 +21,11 @@ A file called "phoneme_count.txt" will be output into the root folder.
 ## 操作方法
 
 ```
-python -m phoneme_count.py
+pip install -r requirements.txt
 ```
-
-次に、「lab」ファイルを含むディレクトリを選択するように尋ねられます。ディレクトリには「lab」ファイルしかないことを確認してください。
+```
+python phoneme_count.py
+```
+データベースを選択するプロンプトが表示されます。念のため、余分なファイルは入れずに、データがあるフォルダを選択することが良いです。
 
 ルートフォルダに「音素の出現回数.txt」というファイルが出力されます。
