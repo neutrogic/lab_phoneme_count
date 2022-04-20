@@ -16,9 +16,15 @@ import yaml
 import locale
 import ctypes
 import tkinter
+import pathlib
 from tkinter import filedialog
+from alive_progress import alive_bar
+from alive_progress import config_handler
+
+#=== Some global config stuff ===
 
 tkinter.Tk().withdraw() #Prevents an empty tkinter window
+config_handler.set_global(length=50, title='Sorting', bar='notes', spinner='notes', unknown='notes')
 
 #=== Detect system language ===
 #=== システム言語の検出 ===
@@ -44,11 +50,10 @@ else:
         )
 
 labs = filedialog.askdirectory()
-
+lab_list = os.listdir(labs)
 phone_list = []
 
-
-for file in os.listdir(labs):
+for file in pathlib.Path(labs).glob('**/*.lab'):
     with open(os.path.join(labs, file), 'r') as f:
         for line in f:
             x1, x2, phone = line.strip().split()
@@ -59,8 +64,11 @@ for file in os.listdir(labs):
 
 phone_cnt = {}
 
-for item in phone_list:
-    phone_cnt[item] = phone_list.count(item)
+with alive_bar(len(phone_list)) as bar:
+    for item in phone_list:
+        phone_cnt[item] = phone_list.count(item)
+        bar()
+
 
 #=== Format the dict to make it more readable using yaml ===
 #=== yamlで、読みやすいようにdictをフォーマットします。 ===
@@ -70,6 +78,8 @@ if lang != 'jp':
 else:
     body = labs + '内のlabファイルの音素数。\n\n'
     
+body = body + 'Total number of Phonemes: ' + str(len(phone_list)) + '\n\n'
+
 body = body + yaml.dump(phone_cnt, sort_keys=True, default_flow_style=False)
 
 #=== Write body to a file called 'phoneme_count.txt' ===
