@@ -41,12 +41,12 @@ if locale.windows_locale[windll.GetUserDefaultUILanguage()] == 'ja_JP':
 if lang != 'jp':
     print(
         '\nCopyright (c) neutrogic 2022\n\n' +
-        'Select directory of .lab files\n'
+        'Select a voice database.\n'
         )
 else:
     print(
         '\nCopyright (c) neutrogic 2022\n\n' +
-        'labファイルのディレクトリを選択します。\n'
+        'ボイスデータベースを選択します。\n'
         )
 
 labs = filedialog.askdirectory()
